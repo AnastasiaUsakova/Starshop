@@ -1,8 +1,10 @@
 using System;
+using Logic;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IShopCustomer
 {
     private Vector2 _movementInput;
 
@@ -42,5 +44,10 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    public void BuyItem(ResourceItemType itemType)
+    {
+        
     }
 }

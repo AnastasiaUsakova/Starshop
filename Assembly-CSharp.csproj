@@ -41,13 +41,17 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
-     <Compile Include="Assets/Scripts/UI/Shop/BaseShopElementView.cs" />
-     <Compile Include="Assets/Scripts/Data/Shop/ShopElementDescriptor.cs" />
+     <Compile Include="Assets/Scripts/Logic/ShopWindowTrigger.cs" />
+     <Compile Include="Assets/Scripts/UI/Shop/ShopWindow.cs" />
      <Compile Include="Assets/Scripts/UI/Shop/ShopElementModel.cs" />
      <Compile Include="Assets/Scripts/Player/ResourceItemType.cs" />
+     <Compile Include="Assets/Scripts/UI/Shop/BaseShopElementView.cs" />
+     <Compile Include="Assets/Scripts/Logic/IShopCustomer.cs" />
+     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
+     <Compile Include="Assets/Scripts/Data/Shop/ShopElementDescriptor.cs" />
      <Compile Include="Assets/Scripts/Utils/AssetProvider.cs" />
-     <Compile Include="Assets\Scripts\UI\Shop\ShopWindow.cs" />
+     <Compile Include="Assets/Scripts/GameData/GameData.cs" />
+     <Compile Include="Assets/Scripts/GameData/GameDataPersist.cs" />
      <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" />
