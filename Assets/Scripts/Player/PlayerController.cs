@@ -8,24 +8,15 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour, IShopCustomer
 {
     [SerializeField] private Rigidbody2D playerRigidBody;
-    [SerializeField] private Animator animator;
+    [SerializeField] private PlayerAnimationController animationController;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private float moveSpeed = 1f;
     [Space]
     [SerializeField] private PlayerStyleSetupHelper styleSetupHelper;
 
-    private bool _isMoving;
     private Vector2 _movementInput;
+    private bool _flip;
 
-    private static readonly int IsPlayerMoving = Animator.StringToHash("isMoving");
-
-    private bool IsMoving {
-        set
-        {
-            _isMoving = value;
-            animator.SetBool(IsPlayerMoving, _isMoving);
-        }
-    }
 
     private void Start()
     {
@@ -49,12 +40,13 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         {
             playerRigidBody.MovePosition(playerRigidBody.position + _movementInput.normalized * moveSpeed * Time.fixedDeltaTime );
 
+            //todo: flip whole body, not a sprite
             playerSprite.flipX = _movementInput.x < 0 || (!(_movementInput.x > 0) && playerSprite.flipX);
-            IsMoving = true;
+            animationController.IsMoving = true;
         }
         else
         {
-            IsMoving = false;
+            animationController.IsMoving = false;
         }
     }
 
@@ -65,6 +57,6 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void ItemBoughtCallback(ResourceItemType itemType, Sprite icon)
     {
-        styleSetupHelper.EquipElement(itemType, icon);
+        styleSetupHelper.TryEquipElement(itemType, icon);
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8815688284248790136}
   - component: {fileID: 5520892850071610747}
+  - component: {fileID: 4080354324499483346}
   m_Layer: 0
   m_Name: Hair
   m_TagString: Untagged
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4080354324499483346
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181278985930657963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 050e27bdb5cb147919c234d13e632af0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1584232530043264708
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1715059103043111509}
   - component: {fileID: 3043551661218728801}
+  - component: {fileID: 7992038960378612520}
   m_Layer: 0
   m_Name: Shirt
   m_TagString: Untagged
@@ -168,6 +190,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7992038960378612520
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584232530043264708}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5861a2fbcb41c49a8900142aee10ed15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2895749777422036138
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5944632451181363098}
   - component: {fileID: 8542751166084522949}
+  - component: {fileID: 4830604620480572418}
   m_Layer: 0
   m_Name: Shoes
   m_TagString: Untagged
@@ -357,6 +400,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4830604620480572418
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4117814848480309850}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4321f6ee2078246b29f1b4093df5f194, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4855885621968623769
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +434,7 @@ GameObject:
   - component: {fileID: 6260388612997194474}
   - component: {fileID: 8232125584598109997}
   - component: {fileID: 7124421914232910837}
+  - component: {fileID: 6515364918878416533}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -440,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRigidBody: {fileID: 6260388612997194474}
-  animator: {fileID: 8743373657246295434}
+  animationController: {fileID: 6515364918878416533}
   playerSprite: {fileID: 5173191359863944973}
   moveSpeed: 1
   styleSetupHelper: {fileID: 7124421914232910837}
@@ -506,7 +570,27 @@ MonoBehaviour:
   equipmentRenderers:
   - resourceItem: 2
     itemRenderer: {fileID: 5520892850071610747}
+    itemAnimator: {fileID: 4080354324499483346}
+    propertyName: isMoving
   - resourceItem: 3
     itemRenderer: {fileID: 3043551661218728801}
+    itemAnimator: {fileID: 7992038960378612520}
+    propertyName: isMoving
   - resourceItem: 4
     itemRenderer: {fileID: 8542751166084522949}
+    itemAnimator: {fileID: 4830604620480572418}
+    propertyName: isMoving
+--- !u!114 &6515364918878416533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4855885621968623769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e896dbb734453d9b066a652a49efd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8743373657246295434}
+  styleHelper: {fileID: 7124421914232910837}
