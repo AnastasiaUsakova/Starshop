@@ -1,4 +1,5 @@
 using System;
+using GameData;
 using Logic;
 using Player;
 using UnityEngine;
@@ -6,24 +7,40 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, IShopCustomer
 {
-    private Vector2 _movementInput;
-
     [SerializeField] private Rigidbody2D playerRigidBody;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSprite;
-
     [SerializeField] private float moveSpeed = 1f;
+    [Space]
+    [SerializeField] private PlayerStyleSetupHelper styleSetupHelper;
+
+    private bool _isMoving;
+    private Vector2 _movementInput;
 
     private static readonly int IsPlayerMoving = Animator.StringToHash("isMoving");
 
-    private bool _isMoving;
-
-    public bool IsMoving {
+    private bool IsMoving {
         set
         {
             _isMoving = value;
             animator.SetBool(IsPlayerMoving, _isMoving);
         }
+    }
+
+    private void Start()
+    {
+        var gameData = GameDataPersist.Instance.GameData;
+        var savedPosition = gameData.PlayerPosition;
+        if (savedPosition != Vector2.zero)
+        {
+            playerRigidBody.transform.position = savedPosition;
+        }
+        styleSetupHelper.Initialize(gameData.EquippedItemsList);
+    }
+
+    private void OnApplicationQuit()
+    {
+        GameDataPersist.Instance.GameData.PlayerPosition = playerRigidBody.transform.position;
     }
 
     private void FixedUpdate()
@@ -46,8 +63,8 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         _movementInput = inputValue.Get<Vector2>();
     }
 
-    public void BuyItem(ResourceItemType itemType)
+    public void ItemBoughtCallback(ResourceItemType itemType, Sprite icon)
     {
-        
+        styleSetupHelper.EquipElement(itemType, icon);
     }
 }

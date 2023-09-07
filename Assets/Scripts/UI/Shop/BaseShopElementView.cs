@@ -19,7 +19,7 @@ namespace UI.Shop
             _model = model;
             elementRenderer.sprite = model.Icon;
             price.text = model.Price;
-            quantity.text = model.Quantity;
+            quantity.text = $"x{model.Quantity}";
             quantity.gameObject.SetActive(model.QuantityLabelEnabled);
             button.onClick.AddListener(OnClicked);
         }

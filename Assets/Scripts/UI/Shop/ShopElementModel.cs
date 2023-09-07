@@ -9,33 +9,31 @@ namespace UI.Shop
     {
         public readonly ResourceItemType ItemType;
         public readonly string Price;
-        public readonly string Quantity;
+        public readonly int Quantity;
         public readonly bool QuantityLabelEnabled;
-        public readonly bool Equipped;
         public readonly Sprite Icon;
-
-        private IShopCustomer _shopCustomer;
+        
+        private readonly bool _equipped;
+        private readonly IShopCustomer _shopCustomer;
+        private readonly ShopElementDescriptor _descriptor;
         
         public ShopElementModel(ShopElementDescriptor descriptor, IShopCustomer shopCustomer)
         {
+            _descriptor = descriptor;
             _shopCustomer = shopCustomer;
             ItemType = descriptor.ResourceItemType;
             Price = descriptor.ItemPrice.ToString();
             var itemQuantity = descriptor.ItemQuantity;
-            Quantity = $"x{itemQuantity}";
+            Quantity = itemQuantity;
             Icon = descriptor.ItemIcon;
             QuantityLabelEnabled = itemQuantity > 1;
-            Equipped = descriptor.Equipped;
+            _equipped = descriptor.Equipped;
         }
 
         public void BuyItem()
         {
-            if (Equipped)
-            {
-                //equip player
-            }
-            _shopCustomer.BuyItem(ItemType);
-            //save to resources using item type from model
+            if (ShopManager.Instance.TryPurchaseItem(_descriptor) && _equipped)
+                _shopCustomer.ItemBoughtCallback(ItemType, Icon);
         }
     }
 }

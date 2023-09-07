@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameData;
 using Logic;
 using Player;
 using TMPro;
@@ -18,8 +19,8 @@ namespace UI.Shop
         [SerializeField] private ResourceItemType[] displayedShopTypes;
 
         private List<BaseShopElementView> _elementViews = new List<BaseShopElementView>();
-        private IShopCustomer _shopCustomer;
         private bool _initialized;
+        private GameData.GameData _gameData;
 
         public void Initialize(IShopCustomer shopCustomer)
         {
@@ -28,10 +29,11 @@ namespace UI.Shop
                 Show();
                 return;
             }
-            
-            _shopCustomer = shopCustomer;
-            var coins = 100;// init from save&load
-            playerCoins.text = coins < 1 ? $"<color=red>{coins}</color>" : $"<color=yellow>{coins}</color>";
+
+            _gameData = GameDataPersist.Instance.GameData;
+            var coins = _gameData.PlayerCoins;
+            SetPlayerCoins(coins);
+            _gameData.PlayerCoinsChanged += SetPlayerCoins;
             foreach (var type in displayedShopTypes)
             {
                 var itemDescriptor = AssetProvider.GetShopElementDescriptor(type);
@@ -43,6 +45,9 @@ namespace UI.Shop
             _initialized = true;
             Show();
         }
+
+        private void SetPlayerCoins(int coins)
+            => playerCoins.text = coins < 1 ? $"<color=red>{coins}</color>" : $"<color=yellow>{coins}</color>";
 
         private void Show()
             => gameObject.SetActive(true);
@@ -61,6 +66,7 @@ namespace UI.Shop
 
         private void OnDestroy()
         {
+            _gameData.PlayerCoinsChanged -= SetPlayerCoins;
             ClearElements();
             closeButton.onClick.RemoveListener(CloseShop);
         }

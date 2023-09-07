@@ -6,6 +6,6 @@ namespace Player
         Coins = 1,
         Hair = 2,
         Shirt = 3,
-        Shoes = 4,
+        Pants = 4,
     }
 }

@@ -1,9 +1,10 @@
 using Player;
+using UnityEngine;
 
 namespace Logic
 {
     public interface IShopCustomer
     {
-        void BuyItem(ResourceItemType itemType);
+        void ItemBoughtCallback(ResourceItemType itemType, Sprite icon);
     }
 }
